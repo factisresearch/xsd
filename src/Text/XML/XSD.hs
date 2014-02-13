@@ -26,15 +26,20 @@ module Text.XML.XSD
 
 import           Text.XML.XSD.DateTime
 
-import           Control.Monad (when)
+import           Prelude(String, Double, Float, Integral, Eq(..), (||))
+import           Control.Monad (Monad(..), when)
+import           Data.Bool(Bool(..))
 import           Data.Fixed (Fixed, HasResolution(..), resolution)
+import           Data.Either(Either(..))
+import           Data.Function((.), ($))
 import           Data.Int (Int8, Int16, Int32, Int64)
+import           Data.List((++))
 import           Data.Text (Text)
-import qualified Data.Text as T
-import qualified Data.Text.Lazy as TL
-import qualified Data.Text.Lazy.Builder as TB
-import qualified Data.Text.Lazy.Builder.Int as TBI
-import qualified Data.Text.Read as TR
+import           Data.Text(unpack)
+import           Data.Text.Lazy(toStrict)
+import           Data.Text.Lazy.Builder(toLazyText)
+import qualified Data.Text.Lazy.Builder.Int as TBI(decimal)
+import qualified Data.Text.Read as TR(rational, double, decimal, signed)
 import           Data.Word (Word8, Word16, Word32, Word64)
 
 data E18
@@ -61,7 +66,7 @@ boolean t =
   then Right True
   else if t == "false" || t == "0"
        then Right False
-       else Left $ "invalid boolean '" ++ T.unpack t ++ "'"
+       else Left $ "invalid boolean '" ++ unpack t ++ "'"
 
 toBoolean :: Bool -> Text
 toBoolean True = "true"
@@ -77,7 +82,7 @@ unsigned :: Integral a => Text -> Either String a
 unsigned = checkReader . TR.decimal
 
 toSigned :: Integral a => a -> Text
-toSigned = TL.toStrict . TB.toLazyText . TBI.decimal
+toSigned = toStrict . toLazyText . TBI.decimal
 
 integer :: Integral a => Text -> Either String a
 integer = signed
