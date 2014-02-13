@@ -26,6 +26,7 @@ module Text.XML.XSD
 
 import           Text.XML.XSD.DateTime
 
+import           Prelude
 import           Control.Monad (when)
 import           Data.Fixed (Fixed, HasResolution(..), resolution)
 import           Data.Int (Int8, Int16, Int32, Int64)

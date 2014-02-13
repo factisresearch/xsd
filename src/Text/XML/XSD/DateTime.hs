@@ -19,6 +19,7 @@ module Text.XML.XSD.DateTime
        , localTime
        ) where
 
+import           Prelude
 import           Control.Applicative (pure, (<$>), (*>), (<|>))
 import           Control.Monad (when)
 import           Data.Attoparsec.Text (Parser, char, digit)
