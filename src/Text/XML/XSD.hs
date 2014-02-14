@@ -26,7 +26,7 @@ module Text.XML.XSD
 
 import           Text.XML.XSD.DateTime
 
-import           Prelude(String, Double, Float, Integral, Eq(..), (||))
+import           Prelude(String, Double, Float, Integral, Eq(..), (||), otherwise)
 import           Control.Monad (Monad(..), when)
 import           Data.Bool(Bool(..))
 import           Data.Fixed (Fixed, HasResolution(..), resolution)
@@ -34,8 +34,7 @@ import           Data.Either(Either(..))
 import           Data.Function((.), ($))
 import           Data.Int (Int8, Int16, Int32, Int64)
 import           Data.List((++))
-import           Data.Text (Text)
-import           Data.Text(unpack)
+import           Data.Text (Text, unpack)
 import           Data.Text.Lazy(toStrict)
 import           Data.Text.Lazy.Builder(toLazyText)
 import qualified Data.Text.Lazy.Builder.Int as TBI(decimal)
@@ -61,12 +60,10 @@ checkReader res =
 --   | otherwise = Right val
 
 boolean :: Text -> Either String Bool
-boolean t =
-  if t == "true" || t == "1"
-  then Right True
-  else if t == "false" || t == "0"
-       then Right False
-       else Left $ "invalid boolean '" ++ unpack t ++ "'"
+boolean t
+  | t == "true" || t == "1" = Right True
+  | t == "false" || t == "0" = Right False
+  | otherwise = Left $ "invalid boolean '" ++ unpack t ++ "'"
 
 toBoolean :: Bool -> Text
 toBoolean True = "true"
