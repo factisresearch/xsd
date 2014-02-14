@@ -63,7 +63,7 @@ import           Data.Time.Calendar.MonthDay (monthLength)
 data DateTime =
   DtZoned UTCTime
   | DtUnzoned LocalTime
-  deriving Eq
+  deriving (Eq, Ord)
 
 -- | Internal helper that creates a date time. Note, if the given hour
 -- is 24 then the minutes and seconds are assumed to be 0.
