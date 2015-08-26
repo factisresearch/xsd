@@ -269,7 +269,7 @@ dateTime' ::
   Text
   -> Either String DateTime
 dateTime' =
-  parseOnly (parseDateTime <|> fail "bad date time")
+  parseOnly (parseDateTime <* endOfInput <|> fail "bad date time")
 
 buildSeconds ::
   Pico
