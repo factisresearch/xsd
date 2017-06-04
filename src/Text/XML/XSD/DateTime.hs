@@ -47,6 +47,7 @@ import           Data.Time.Calendar.MonthDay (monthLength)
 -- $setup
 -- >>> :set -XOverloadedStrings
 -- >>> import Test.QuickCheck.Instances ()
+-- >>> import Data.Functor(fmap)
 -- >>> let mkLocal :: Integer -> Int -> Int -> Int -> Int -> Pico -> LocalTime; mkLocal y m d hh mm ss = LocalTime (fromGregorian y m d) (TimeOfDay hh mm ss)
 -- >>> let mkUTC :: Integer -> Int -> Int -> Int -> Int -> Pico -> UTCTime; mkUTC y m d hh mm ss = localTimeToUTC utc (mkLocal y m d hh mm ss)
 -- >>> let mkZoned :: Integer -> Int -> Int -> Int -> Int -> Pico -> Int -> Int -> ZonedTime; mkZoned y m d hh mm ss zh zm = ZonedTime (mkLocal y m d hh mm ss) (TimeZone offset False "") where offset = signum zh * (abs zh * 60 + zm)
