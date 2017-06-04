@@ -23,7 +23,7 @@ module Text.XML.XSD.DateTime
        , localTime
        ) where
 
-import           Prelude(Show(..), Read(..), Eq(..), Ord(..), Num(..), Int, Integer, String, (&&), (||), read, fromIntegral, realToFrac)
+import           Prelude(Show(..), Eq(..), Ord(..), Num(..), Int, Integer, String, (&&), (||), read, fromIntegral, realToFrac)
 import           Control.Applicative (pure, (<$>), (*>), (<|>))
 import           Control.Monad (Monad(..), when)
 import           Control.Lens(Iso', Prism', _Left, _Right, iso, prism', from, isn't, (#), (^?))
@@ -34,9 +34,9 @@ import           Data.Either(Either(..), either)
 import           Data.Fixed (Pico, showFixed)
 import           Data.Function((.), id, ($), const)
 import           Data.List((++))
-import           Data.Maybe (Maybe(..), maybeToList, maybe)
+import           Data.Maybe (Maybe(..), maybe)
 import           Data.Monoid ((<>))
-import           Data.Text(Text, pack, unpack, length, head)
+import           Data.Text(Text, unpack, length, head)
 import           Data.Text.Lazy as TL(toStrict)
 import           Data.Text.Lazy.Builder(Builder, toLazyText, fromString)
 import           Data.Text.Lazy.Builder.Int (decimal)
@@ -88,9 +88,6 @@ mkDateTime y m d hh mm ss mz =
 
 instance Show DateTime where
   show = unpack . (dateTime #)
-
-instance Read DateTime where
-  readList s = [(maybeToList (pack s ^? dateTime), [])]
 
 -- | The isomorphism between a @DateTime@ and @Either UTCTime LocalTime@
 isoEither ::
