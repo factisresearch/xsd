@@ -11,7 +11,7 @@ description:          XML Schema data structures (XSD)
 homepage:             https://github.com/tonymorris/xsd
 bug-reports:          https://github.com/tonymorris/xsd/issues
 cabal-version:        >= 1.10
-build-type:           Custom
+build-type:           Simple
 extra-source-files:   ChangeLog
 
 source-repository     head
